@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://UI Controls/JoystickPanel/JoystickPanel.gd" type="Script" id=1]
+[ext_resource path="res://UI Controls/Joystick/Joystick.tscn" type="PackedScene" id=2]
+
+[node name="JoystickPanel" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+
+[node name="LeftStick" parent="." instance=ExtResource( 2 )]
+stick_size = 0.4
+
+[node name="RightStick" parent="." instance=ExtResource( 2 )]
+anchor_left = 0.5
+anchor_right = 1.0
+stick_size = 0.4
+
+[node name="Label" type="Label" parent="."]
+margin_left = 39.4509
+margin_top = 35.3697
+margin_right = 261.451
+margin_bottom = 151.37

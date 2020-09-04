@@ -1,0 +1,15 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Models/lance.dae" type="PackedScene" id=1]
+[ext_resource path="res://Objects/Scripts/Utility/LookAt.gd" type="Script" id=2]
+[ext_resource path="res://Textures/lance_a.png" type="Texture" id=3]
+
+[sub_resource type="SpatialMaterial" id=1]
+albedo_texture = ExtResource( 3 )
+
+[node name="Lance" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+
+[node name="Cube" parent="." index="0"]
+transform = Transform( -1, 0, -8.74228e-008, 0, 1, 0, 8.74228e-008, 0, -1, 0, 0, -0.479869 )
+material/0 = SubResource( 1 )

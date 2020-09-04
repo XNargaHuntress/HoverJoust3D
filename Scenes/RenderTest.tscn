@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Objects/HoverBike.tscn" type="PackedScene" id=1]
+
+[node name="Spatial" type="Spatial"]
+
+[node name="InterpolatedCamera" type="InterpolatedCamera" parent="."]
+target = NodePath("../HoverBike/Spatial")
+speed = 20.0
+enabled = true
+
+[node name="HoverBike" parent="." instance=ExtResource( 1 )]
+thrust = 2.0
+top_speed = 2.0
+
+[node name="Spatial" type="Spatial" parent="HoverBike"]
+transform = Transform( -0.378543, 0.343448, -0.859505, 0, 0.928608, 0.371061, 0.925584, 0.140463, -0.351519, -1.66471, 1.02973, -0.79487 )

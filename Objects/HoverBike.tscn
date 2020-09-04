@@ -1,0 +1,69 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Objects/Scripts/HoverBike.gd" type="Script" id=1]
+[ext_resource path="res://Objects/Scripts/LanceTargeter.gd" type="Script" id=2]
+[ext_resource path="res://Objects/HoverDargon.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Objects/Lance.tscn" type="PackedScene" id=4]
+
+[sub_resource type="Curve" id=1]
+_data = [ Vector2( 0, 0 ), 0.0, 2.16479, 0, 0, Vector2( 1, 1 ), 2.46027, 0.0, 0, 0 ]
+
+[sub_resource type="ConvexPolygonShape" id=2]
+points = PoolVector3Array( 0.125, 0.75, 0, -1, 0.75, 0, 0.125, -0.25, 0, -1, -0.25, 0, 0, 3, 8, -4, 3, 8, 0, -0.25, 8, -4, -0.25, 8 )
+
+[sub_resource type="CapsuleShape" id=3]
+radius = 0.309849
+height = 1.88243
+
+[node name="HoverBike" type="KinematicBody"]
+script = ExtResource( 1 )
+bike_path = NodePath("HoverDargon")
+curve = SubResource( 1 )
+
+[node name="LanceTarget" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.28811, 3.07079 )
+
+[node name="LanceTargeting" type="Area" parent="."]
+input_ray_pickable = false
+script = ExtResource( 2 )
+lance = NodePath("../HoverDargon/Lance")
+h_limit = 20.0
+v_limit = 30.0
+
+[node name="CollisionShape" type="CollisionShape" parent="LanceTargeting"]
+shape = SubResource( 2 )
+
+[node name="HoverDargon" parent="." instance=ExtResource( 3 )]
+
+[node name="Lance" parent="HoverDargon" instance=ExtResource( 4 )]
+transform = Transform( -1, 0, 8.74228e-008, 0, 1, 0, -8.74228e-008, 0, -1, -0.157485, 0.275028, 0.414223 )
+script = null
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+shape = SubResource( 3 )
+
+[node name="OrientationCast_0" type="RayCast" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.25, 0, 0.7 )
+enabled = true
+cast_to = Vector3( 0, -1.25, 0 )
+
+[node name="OrientationCast_1" type="RayCast" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, 0, 0.7 )
+enabled = true
+cast_to = Vector3( 0, -1.25, 0 )
+
+[node name="OrientationCast_2" type="RayCast" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, 0, -0.6 )
+enabled = true
+cast_to = Vector3( 0, -1.25, 0 )
+
+[node name="OrientationCast_3" type="RayCast" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.25, 0, -0.6 )
+enabled = true
+cast_to = Vector3( 0, -1.25, 0 )
+
+[node name="HoverCast" type="RayCast" parent="."]
+enabled = true
+cast_to = Vector3( 0, -1.25, 0 )
+[connection signal="body_entered" from="LanceTargeting" to="LanceTargeting" method="_on_LanceTargeting_body_entered"]
+[connection signal="body_exited" from="LanceTargeting" to="LanceTargeting" method="_on_LanceTargeting_body_exited"]
